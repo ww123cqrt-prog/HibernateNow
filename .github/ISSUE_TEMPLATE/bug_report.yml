@@ -1,0 +1,23 @@
+name: 问题报告
+description: 报告电源管理应用的问题
+body:
+  - type: input
+    id: version
+    attributes:
+      label: 应用版本与 macOS 版本
+    validations:
+      required: true
+  - type: dropdown
+    id: architecture
+    attributes:
+      label: 电脑架构
+      options:
+        - Apple Silicon
+        - Intel
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤、预期与实际结果
+      description: 如涉及合盖，请说明电池或接电源、是否连接外接显示器；不要上传私有配置。
+    validations:
+      required: true

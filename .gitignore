@@ -1,0 +1,12 @@
+.build/
+dist/
+.DS_Store
+.codegraph/
+.codex/
+.swiftpm/
+Resources/DockIcons/Candidates/
+*.dmg
+*.pkg
+*.xcuserstate
+__pycache__/
+*.py[cod]

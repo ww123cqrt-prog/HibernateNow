@@ -1,0 +1,23 @@
+电源管理 / HibernateNow
+
+安装
+1. 将“电源管理.app”拖到 Applications 文件夹。
+2. 弹出磁盘镜像，从“应用程序”打开“电源管理”。
+3. 首次使用，点击“启用免密切换”，通过一次系统管理员授权。
+
+此版本采用 ad-hoc 临时签名，尚未完成 Developer ID 签名与 Apple 公证。
+如果 macOS 阻止打开，请先核对 GitHub Release 中的 SHA256SUMS.txt。
+确认来源可信后，参照 Apple 官方说明自行决定是否允许打开：
+https://support.apple.com/102445
+安装包不会关闭 Gatekeeper 或自动授权电源命令。
+
+卸载
+先切回“合盖睡眠”，点击“关闭免密”，完成系统授权，再退出应用并将应用移到废纸篓。
+直接删除应用不会恢复电源设置或删除已经启用的账号权限。
+
+源码与更新
+https://github.com/ww123cqrt-prog/HibernateNow
+
+平台
+包名中的 arm64 表示 Apple Silicon，x86_64 表示 Intel。
+应用声明最低 macOS 14.0。

@@ -1,0 +1,44 @@
+{
+  "generator": "built-in imagegen",
+  "reference": "Resources/HibernateNow-icon.png",
+  "screen_semantics": "Stylized policy illustration, not live detection of screen brightness or task activity",
+  "prompts": [
+    {
+      "mode": "hibernate",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied current macOS app icon for 电源管理. Produce ONE finished square macOS Dock app icon, not a sheet, contact sheet, mockup, grid, screenshot or icon with a caption. Preserve the exact composition, perspective, camera angle, open silver laptop geometry, keyboard, trackpad, hinge, screen outline, position and size from the edit target. Keep the original premium softly lit 3D macOS icon craftsmanship, glossy rounded square silhouette and transparent outside corners. The slim silver laptop must remain physically correct and identical to the reference, rather than becoming a different device. Change only the rounded tile's color mood, the large upper-right state emblem and the display surface. Maintain clean, bold, recognizable shapes when reduced to 32–64 pt in a Dock. Keep the emblem substantial, approximately 26–30 percent of the tile width; it must not become a tiny badge. Preserve generous spacing around the laptop and state emblem. Do not add any logo, caption, icon name, border outside the tile, taskbar, legible UI text, extra devices or watermark. Remove the stray blue pixels around the reference: absolutely all space outside the rounded tile must be fully transparent, clean alpha with no specks. Single icon centered on a square canvas; tile stays the same relative size as reference.\nSTATE: 合盖休眠 / deeper hibernation configuration. Rounded tile is deep midnight navy, restrained blue sheen. Replace the crescent with a big ivory Zzz sleep emblem in the same upper-right region: dominant large capital Z plus two smaller z, clean polished 3D lettering readable at small size. The laptop screen is fully OFF, rich near-black with only extremely subtle ambient reflection. It must emit no light and show no windows, graphics or wallpaper. Make the dark screen clearly distinguishable from the silver bezel. No glow from screen onto keyboard."
+    },
+    {
+      "mode": "sleep",
+      "prompt": "Edit the supplied macOS Dock icon for 电源管理 ordinary sleep mode. Deliver ONE finished square icon. Preserve the exact silver laptop geometry, open-lid angle, keyboard, trackpad, camera dot, crescent shape and location, rounded-square outline and composition. The existing electric royal-blue background and bright blue moon halo are too intense: replace them with a calm low-saturation moonlit navy-to-slate-blue palette, approximately #17283F to #334D67, with gentle misty-blue reflected light. Reduce the moon's blue halo substantially and make the crescent soft ivory, never dazzling white. Use restrained metallic highlights and a softly polished edge rather than a blazing rim. The current nearly black laptop screen looks switched OFF. For this stylized sleep-state illustration, replace it with a clearly visible dim misty moonlight-blue display, approximately #3C5A72 to #233C54, a quiet low-brightness gradient with a very faint soft reflection. It must feel resting and softly dimmed, distinct from the pure-black hibernation screen and distinct from an active document editor. No document window, toolbar, wallpaper icons, readable text or bright screen glare. Keep screen luminance modest. Do not add any object, text, logo or caption. Outside the rounded tile must be completely transparent, clean alpha with no sparks or specks. High-resolution finished app icon, not a contact sheet.",
+      "reference_description": "Earlier sleep variant with a black screen, edited for softer moonlight"
+    },
+    {
+      "mode": "keepRunning",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied current macOS app icon for 电源管理. Produce ONE finished square macOS Dock app icon, not a sheet, contact sheet, mockup, grid, screenshot or icon with a caption. Preserve the exact composition, perspective, camera angle, open silver laptop geometry, keyboard, trackpad, hinge, screen outline, position and size from the edit target. Keep the original premium softly lit 3D macOS icon craftsmanship, glossy rounded square silhouette and transparent outside corners. The slim silver laptop must remain physically correct and identical to the reference, rather than becoming a different device. Change only the rounded tile's color mood, the large upper-right state emblem and the display surface. Maintain clean, bold, recognizable shapes when reduced to 32–64 pt in a Dock. Keep the emblem substantial, approximately 26–30 percent of the tile width; it must not become a tiny badge. Preserve generous spacing around the laptop and state emblem. Do not add any logo, caption, icon name, border outside the tile, taskbar, legible UI text, extra devices or watermark. Remove the stray blue pixels around the reference: absolutely all space outside the rounded tile must be fully transparent, clean alpha with no specks. Single icon centered on a square canvas; tile stays the same relative size as reference.\nSTATE: 合盖继续运行 / keep working configuration. Rounded tile has a warm amber-gold gradient with premium depth and restrained soft warm highlights, while laptop remains the same neutral silver device. Replace the crescent with a large ivory sun emblem with clear short rays in the same upper-right region. The laptop screen is ON and visibly luminous. Show one simplified document editor: a blue top toolbar, one large white document page with three broad dark gray text strokes and a simple blue desktop margin. The screen content must have clean, correctly perspective-warped geometry entirely inside the display. No readable text, brand logos or tiny clutter. A subtle blue-white screen glow may illuminate the keyboard. This is a working document cue, not a colorful wallpaper or screenshot."
+    }
+  ],
+  "outputs": {
+    "hibernate": "Resources/DockIcons/hibernate.png",
+    "sleep": "Resources/DockIcons/sleep.png",
+    "keepRunning": "Resources/DockIcons/keepRunning.png"
+  },
+  "selection": {
+    "hibernate": "original midnight navy Zzz",
+    "sleep": "revised soft moonlight blue",
+    "keepRunning": "original amber-gold tile and sun"
+  },
+  "sha256": {
+    "hibernate": {
+      "png": "f8156333af363a37d537ebb41b1637a89837c81cd05f0146e7aa7f60e5df31c0",
+      "icns": "14589f37d5c9cd63a6464335ece6583cde1d3020f616bcc9da6d5128014297cf"
+    },
+    "sleep": {
+      "png": "5bbb2591b911a111fdbd8ecc14110ed4f1b360a9712d317b82669848eaad633b",
+      "icns": "cee69e8bfa5ccd5f959282607703cdaec683f275110ae042446c6244908225ad"
+    },
+    "keepRunning": {
+      "png": "7eccabc21164c4e84d320181631daec70d5a0c2fbe2b75a992ea913e373eadd0",
+      "icns": "0d022f55b10b9e1cd1b64dfa717a2d7879210a350c90195a49b7c6836655abef"
+    }
+  }
+}
