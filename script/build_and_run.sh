@@ -54,7 +54,7 @@ cat >"$APP_CONTENTS/Info.plist" <<PLIST
   <key>CFBundleDisplayName</key><string>$DISPLAY_NAME</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleShortVersionString</key><string>$APP_VERSION</string>
-  <key>CFBundleVersion</key><string>10</string>
+  <key>CFBundleVersion</key><string>11</string>
   <key>CFBundleIconFile</key><string>HibernateNow</string>
   <key>LSMinimumSystemVersion</key><string>14.0</string>
   <key>NSPrincipalClass</key><string>NSApplication</string>

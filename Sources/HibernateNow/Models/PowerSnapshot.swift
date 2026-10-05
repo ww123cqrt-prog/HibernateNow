@@ -54,20 +54,23 @@ struct PowerSnapshot: Equatable {
 
         for line in custom.split(separator: "\n") {
             let trimmed = line.trimmingCharacters(in: .whitespaces)
-            if trimmed == "Battery Power:" {
-                section = "battery"
-                continue
-            }
-            if trimmed == "AC Power:" {
-                section = "ac"
+            if trimmed.hasSuffix(":") {
+                section = trimmed == "Battery Power:" ? "battery" :
+                    (trimmed == "AC Power:" ? "ac" : nil)
                 continue
             }
             let words = trimmed.split(whereSeparator: \.isWhitespace)
-            guard words.count >= 2, words[0] == "hibernatemode", let value = Int(words[1]) else {
-                continue
+            guard let section, words.first == "hibernatemode" else { continue }
+            guard words.count == 2, let value = Int(words[1]) else {
+                throw PowerError.unreadableSettings
             }
-            if section == "battery" { batteryMode = value }
-            if section == "ac" { acMode = value }
+            if section == "battery" {
+                guard batteryMode == nil else { throw PowerError.unreadableSettings }
+                batteryMode = value
+            } else {
+                guard acMode == nil else { throw PowerError.unreadableSettings }
+                acMode = value
+            }
         }
 
         guard let batteryMode, let acMode else { throw PowerError.unreadableSettings }

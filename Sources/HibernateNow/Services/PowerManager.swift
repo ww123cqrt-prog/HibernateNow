@@ -6,7 +6,9 @@ final class PowerManager: ObservableObject {
     @Published private(set) var isApplying = false
     @Published private(set) var passwordlessEnabled = false
     @Published private(set) var isConfiguringAccess = false
-    @Published var selectedMode: LidMode = .sleep
+    @Published var selectedMode: LidMode = .sleep {
+        didSet { hasPendingSelection = snapshot?.matchesTarget(selectedMode) != true }
+    }
     @Published var notice: String?
     @Published var error: String?
 
@@ -15,6 +17,8 @@ final class PowerManager: ObservableObject {
     private let requestSleep: () throws -> Void
     private let readPasswordlessStatus: () -> Bool
     private let configurePasswordless: (Bool) throws -> Void
+    // User intent must survive an unreadable snapshot without keeping stale displayed settings.
+    private var hasPendingSelection = false
 
     init(
         readSettings: @escaping () throws -> PowerSnapshot = { try PowerSettingsClient().read() },
@@ -35,12 +39,15 @@ final class PowerManager: ObservableObject {
         guard !isApplying && !isConfiguringAccess else { return }
         notice = nil
         passwordlessEnabled = readPasswordlessStatus()
-        let hadPendingChoice = snapshot?.lidMode.map { $0 != selectedMode } ?? false
+        let keepPendingChoice = preservingSelection && hasPendingSelection
         do {
             let latest = try readSettings()
             snapshot = latest
-            if !preservingSelection || !hadPendingChoice {
+            if !keepPendingChoice {
                 selectedMode = latest.lidMode ?? .sleep
+                hasPendingSelection = false
+            } else {
+                hasPendingSelection = !latest.matchesTarget(selectedMode)
             }
             error = nil
         } catch {
@@ -60,6 +67,7 @@ final class PowerManager: ObservableObject {
             let latest = try readSettings()
             snapshot = latest
             guard latest.matchesTarget(target) else { throw PowerError.verificationFailed }
+            hasPendingSelection = false
             notice = "已应用“\(target.title)”设置。"
             error = nil
         } catch {
@@ -67,6 +75,7 @@ final class PowerManager: ObservableObject {
             self.error = error.localizedDescription
             // A partial command may have changed a setting. Never retain a stale snapshot.
             snapshot = try? readSettings()
+            if let snapshot { hasPendingSelection = !snapshot.matchesTarget(selectedMode) }
         }
     }
 

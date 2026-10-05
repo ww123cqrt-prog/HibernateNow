@@ -99,6 +99,49 @@ struct PowerManagerChecks {
         noPendingChoice.refresh(preservingSelection: true)
         precondition(noPendingChoice.selectedMode == .sleep, "Return must sync when there is no pending choice")
 
+        var recoveryReadFails = false
+        let recoveringChoice = PowerManager(
+            readSettings: {
+                if recoveryReadFails { throw PowerError.unreadableSettings }
+                return sleep
+            },
+            applySettings: { _ in }, requestSleep: {}, readPasswordlessStatus: { false }
+        )
+        recoveringChoice.selectedMode = .hibernate
+        recoveryReadFails = true
+        recoveringChoice.refresh(preservingSelection: true)
+        precondition(recoveringChoice.snapshot == nil)
+        recoveryReadFails = false
+        recoveringChoice.refresh(preservingSelection: true)
+        precondition(recoveringChoice.snapshot == sleep)
+        precondition(recoveringChoice.selectedMode == .hibernate,
+                     "Read recovery must preserve an unapplied choice")
+
+        var customOnReturn = PowerSnapshot(sleepDisabled: false, batteryHibernateMode: 3,
+                                          acHibernateMode: 25, powerSource: "电池")
+        let customChoice = PowerManager(
+            readSettings: { customOnReturn }, applySettings: { _ in }, requestSleep: {},
+            readPasswordlessStatus: { false }
+        )
+        customChoice.selectedMode = .keepRunning
+        customOnReturn = sleep
+        customChoice.refresh(preservingSelection: true)
+        precondition(customChoice.selectedMode == .keepRunning,
+                     "An unrecognized configuration must not erase an unapplied choice")
+
+        var startupReadFails = true
+        let recoveredWithoutChoice = PowerManager(
+            readSettings: {
+                if startupReadFails { throw PowerError.unreadableSettings }
+                return hibernate
+            },
+            applySettings: { _ in }, requestSleep: {}, readPasswordlessStatus: { false }
+        )
+        startupReadFails = false
+        recoveredWithoutChoice.refresh(preservingSelection: true)
+        precondition(recoveredWithoutChoice.selectedMode == .hibernate,
+                     "Recovery with no user choice must follow the actual configuration")
+
         var enabled = false
         let accessManager = PowerManager(
             readSettings: { sleep }, applySettings: { _ in }, requestSleep: {},
