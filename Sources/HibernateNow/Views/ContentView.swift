@@ -88,7 +88,10 @@ struct ContentView: View {
         .frame(width: 580)
         .alert("合盖后电脑会继续运行", isPresented: $showKeepRunningConfirmation) {
             Button("取消", role: .cancel) {}
-            Button("确认开启") { manager.applySelected() }
+            Button("确认开启") {
+                manager.selectedMode = .keepRunning
+                manager.applySelected()
+            }
         } message: {
             Text("此档位会阻止合盖和空闲自动休眠，电池供电时也生效。退出软件后设置仍会保留；放入背包前请切换到休眠或睡眠。")
         }
