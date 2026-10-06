@@ -53,20 +53,28 @@ struct ContentView: View {
                 Label(error, systemImage: "exclamationmark.triangle.fill")
                     .foregroundStyle(.red)
                     .font(.callout)
-            } else if let notice = manager.notice {
-                Label(notice, systemImage: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                    .font(.callout)
             }
 
-            HStack {
+            HStack(spacing: 12) {
                 Button("立即睡眠") {
                     manager.sleepNow()
                 }
                 .disabled(manager.snapshot?.sleepDisabled != false || !manager.passwordlessEnabled || isBusy)
                 .help("按当前档位立即进入 macOS 睡眠；合盖继续运行时不可用")
 
-                Spacer()
+                // Reserve the same space before and after a success message appears.
+                ZStack {
+                    if manager.error == nil, let notice = manager.notice {
+                        Label(notice, systemImage: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                            .font(.callout)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+                            .help(notice)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 40)
 
                 Button("应用此档") {
                     if manager.selectedMode == .keepRunning {
